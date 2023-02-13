@@ -32,7 +32,8 @@ const LandingPage = () => {
     };
 
     renderUser();
-  });
+  }, []);
+
   return (
     <StyledSection>
       <div>

@@ -65,7 +65,7 @@ export const StyledSection = styled.section`
     margin-top: 23px;
   }
 
-  @media (min-width: 426px) {
+  @media (min-width: 769px) {
     div {
       width: 777px;
     }

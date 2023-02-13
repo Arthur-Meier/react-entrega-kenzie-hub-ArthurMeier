@@ -29,6 +29,7 @@ const LoginPage = () => {
       window.localStorage.clear();
       window.localStorage.setItem("@TOKEN", response.data.token);
       window.localStorage.setItem("@USERID", response.data.user.id);
+      console.log(formData);
     } catch (error) {
       console.log(error);
     }
