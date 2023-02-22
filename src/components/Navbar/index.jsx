@@ -1,19 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
 import Logo from "../../assets/Logo.svg";
-import { StyledNav } from "./styled";
+import { UserContext } from "../../providers/UserContext";
+import { StyledButton, StyledNav } from "./styled";
 
 export const Navbar = ({ name }) => {
-  const logout = () => {
-    window.localStorage.clear();
-  };
+  const { logout } = useContext(UserContext);
 
   return (
     <StyledNav>
       <img className="Logo" src={Logo} alt="Logo Kenzie Hub" />
-      <Link to="/" onClick={logout}>
+      <StyledButton to="/" onClick={logout}>
         {name}
-      </Link>
+      </StyledButton>
     </StyledNav>
   );
 };

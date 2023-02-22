@@ -65,6 +65,28 @@ export const StyledSection = styled.section`
     margin-top: 23px;
   }
 
+  main > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 18px 0 28px 0;
+  }
+
+  main > div > h2 {
+    margin: 0;
+  }
+
+  main > div > button {
+    height: 32px;
+    width: 32px;
+    background: #212529;
+    border-radius: 4px;
+
+    color: #ffffff;
+    font-weight: 500;
+    font-size: larger;
+  }
+
   @media (min-width: 769px) {
     div {
       width: 777px;

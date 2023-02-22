@@ -3,12 +3,22 @@ import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 import Input from "../../components/Input";
 import * as yup from "yup";
-import { api } from "../../sevices/api";
 import { StyledDiv } from "./style";
 import Logo from "../../assets/Logo.svg";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../providers/UserContext";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+
+  const { loginUser } = useContext(UserContext);
+
+  useEffect(() => {
+    const token = localStorage.getItem("@TOKEN");
+    if (token) {
+      navigate("/LandingPage");
+    }
+  }, []);
 
   const formSchema = yup.object().shape({
     email: yup.string().required("Email obrigatorio"),
@@ -22,18 +32,6 @@ const LoginPage = () => {
   } = useForm({
     resolver: yupResolver(formSchema),
   });
-
-  const loginUser = async (formData) => {
-    try {
-      const response = await api.post("/sessions", formData);
-      window.localStorage.clear();
-      window.localStorage.setItem("@TOKEN", response.data.token);
-      window.localStorage.setItem("@USERID", response.data.user.id);
-      console.log(formData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const goToLanding = (data) => {
     loginUser(data);

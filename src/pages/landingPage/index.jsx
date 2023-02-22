@@ -1,38 +1,16 @@
-import { useNavigate } from "react-router-dom";
 import { Navbar } from "../../components/Navbar";
-import { api } from "../../sevices/api";
-import { useState, useEffect } from "react";
+import { TechsList } from "../../components/TechsList";
+import { useContext } from "react";
 import { StyledSection } from "./style";
+import { UserContext } from "../../providers/UserContext";
+import { TechContext } from "../../providers/TechContext";
 
 const LandingPage = () => {
-  const navigate = useNavigate();
+  const { User, userRender } = useContext(UserContext);
 
-  const [User, setUser] = useState({});
+  const { Techs } = useContext(TechContext);
 
-  const handleForm = (event) => {
-    event.preventDefault();
-
-    navigate("/");
-  };
-
-  useEffect(() => {
-    const renderUser = async () => {
-      const user = localStorage.getItem("@TOKEN");
-      const config = {
-        headers: {
-          Authorization: "Bearer " + user,
-        },
-      };
-      try {
-        const response = await api.get("/profile", config);
-        setUser(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    renderUser();
-  }, []);
+  userRender();
 
   return (
     <StyledSection>
@@ -43,10 +21,11 @@ const LandingPage = () => {
           <span>{User.course_module}</span>
         </header>
         <main>
-          <h2>Que pena! Estamos em desenvolvimento :(</h2>
-          <p>
-            Nossa aplicação está em desenvolvimento, em breve teremos novidades
-          </p>
+          <div>
+            <h2>Tecnologias</h2>
+            <button onSubmit={() => addTech()}>+</button>
+          </div>
+          <TechsList Techs={Techs} />
         </main>
       </div>
     </StyledSection>

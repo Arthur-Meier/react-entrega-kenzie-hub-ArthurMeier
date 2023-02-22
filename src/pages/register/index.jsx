@@ -1,15 +1,13 @@
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Input from "../../components/Input";
-import { api } from "../../sevices/api";
 import { Navbar } from "../../components/Navbar";
 import { StyledMain } from "./style";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
 
 const RegisterPage = () => {
-  const navigate = useNavigate();
-
   const formSchema = yup.object().shape({
     name: yup.string().required("Nome obrigatorio"),
     email: yup.string().required("Email obrigatorio").email("email invalido"),
@@ -28,6 +26,8 @@ const RegisterPage = () => {
     contact: yup.string().required("Contato obrigatorio"),
   });
 
+  const { registerUser } = useContext(UserContext);
+
   const {
     register,
     handleSubmit,
@@ -35,15 +35,6 @@ const RegisterPage = () => {
   } = useForm({
     resolver: yupResolver(formSchema),
   });
-
-  const registerUser = async (formData) => {
-    try {
-      const response = await api.post("/users", formData);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const onSubmitFunction = (data) => {
     registerUser(data);

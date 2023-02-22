@@ -14,7 +14,7 @@ export const StyledNav = styled.nav`
     height: 16.9px;
   }
 
-  a {
+  nav > button {
     width: 79.54px;
     height: 31.95px;
 
@@ -29,7 +29,7 @@ export const StyledNav = styled.nav`
     font-family: "Inter";
     font-style: normal;
     font-weight: 600;
-    font-size: 9.59437px;
+    font-size: 12px;
     line-height: 23px;
 
     text-align: center;
@@ -38,4 +38,29 @@ export const StyledNav = styled.nav`
 
     text-decoration: none;
   }
+`;
+
+export const StyledButton = styled.button`
+  width: 79.54px;
+  height: 31.95px;
+
+  background: #212529;
+  border-radius: 4px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 23px;
+
+  text-align: center;
+
+  color: #f8f9fa;
+
+  text-decoration: none;
 `;
