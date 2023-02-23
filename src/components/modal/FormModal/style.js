@@ -2,9 +2,6 @@ import styled from "styled-components";
 
 export const StyledFormModal = styled.form`
   width: 295px;
-  left: 535px;
-  top: 189px;
-  overflow-y: scroll;
 
   background: #212529;
   box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
