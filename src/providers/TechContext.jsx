@@ -8,6 +8,8 @@ export const TechProvider = ({ children }) => {
 
   const token = localStorage.getItem("@TOKEN");
 
+  const [patchTechId, setPatchTechId] = useState(undefined);
+
   useEffect(() => {
     const renderTechs = async () => {
       const userId = localStorage.getItem("@USERID");
@@ -49,8 +51,38 @@ export const TechProvider = ({ children }) => {
     }
   };
 
+  const patchTech = async (status) => {
+    try {
+      const techIndex = Techs.findIndex((tech) => tech.id == patchTechId);
+      if (techIndex == -1) {
+        throw new Error(`Tech id ${patchTechId} not found!`);
+      }
+      const response = await api.put(`/users/techs/${patchTechId}`, status, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { ...item } = Techs[techIndex];
+      item.status = status.status;
+      const newTechs = [...Techs];
+      newTechs.splice(techIndex, 1, item);
+      setTechs(newTechs);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <TechContext.Provider value={{ createTech, removeTech, Techs }}>
+    <TechContext.Provider
+      value={{
+        createTech,
+        removeTech,
+        Techs,
+        patchTech,
+        patchTechId,
+        setPatchTechId,
+      }}
+    >
       {children}
     </TechContext.Provider>
   );

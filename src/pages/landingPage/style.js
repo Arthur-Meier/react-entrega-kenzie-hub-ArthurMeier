@@ -14,7 +14,7 @@ export const StyledSection = styled.section`
     height: 131px;
   }
 
-  h1 {
+  header > h1 {
     font-family: "Inter";
     font-style: normal;
     font-weight: 700;
@@ -26,7 +26,7 @@ export const StyledSection = styled.section`
     margin: 35.5px 0 10px 12px;
   }
 
-  span {
+  header > span {
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
@@ -88,19 +88,15 @@ export const StyledSection = styled.section`
   }
 
   @media (min-width: 769px) {
-    div {
-      width: 777px;
-    }
-
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    h1 {
+    header > h1 {
       margin: 0;
     }
-    span {
+    header > span {
       margin: 0;
     }
     main {

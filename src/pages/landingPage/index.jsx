@@ -1,16 +1,22 @@
 import { Navbar } from "../../components/Navbar";
 import { TechsList } from "../../components/TechsList";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { StyledSection } from "./style";
 import { UserContext } from "../../providers/UserContext";
-import { TechContext } from "../../providers/TechContext";
+import CreateTechModal from "../../components/modal/CreateTechModal";
 
 const LandingPage = () => {
-  const { User, userRender } = useContext(UserContext);
+  const { User } = useContext(UserContext);
 
-  const { Techs } = useContext(TechContext);
+  const [openModal, setOpenModal] = useState(false);
 
-  userRender();
+  const showModal = () => {
+    setOpenModal(true);
+  };
+
+  const closeModal = () => {
+    setOpenModal(false);
+  };
 
   return (
     <StyledSection>
@@ -23,11 +29,12 @@ const LandingPage = () => {
         <main>
           <div>
             <h2>Tecnologias</h2>
-            <button onSubmit={() => addTech()}>+</button>
+            <button onClick={() => showModal()}>+</button>
           </div>
-          <TechsList Techs={Techs} />
+          <TechsList />
         </main>
       </div>
+      <CreateTechModal isOpen={openModal} onClose={closeModal} />
     </StyledSection>
   );
 };

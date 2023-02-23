@@ -13,13 +13,6 @@ const LoginPage = () => {
 
   const { loginUser } = useContext(UserContext);
 
-  useEffect(() => {
-    const token = localStorage.getItem("@TOKEN");
-    if (token) {
-      navigate("/LandingPage");
-    }
-  }, []);
-
   const formSchema = yup.object().shape({
     email: yup.string().required("Email obrigatorio"),
     password: yup.string().required("Senha obrigatoria"),

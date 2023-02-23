@@ -72,7 +72,7 @@ export const StyledMain = styled.main`
     color: #868e96;
   }
 
-  button {
+  form > button {
     gap: 10.15px;
 
     width: 293px;

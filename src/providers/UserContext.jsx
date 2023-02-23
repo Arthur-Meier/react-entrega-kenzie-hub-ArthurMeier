@@ -12,9 +12,9 @@ export const UserProvider = ({ children }) => {
   const loginUser = async (formData) => {
     try {
       const response = await api.post("/sessions", formData);
+      setUser(response.data.user);
       localStorage.setItem("@TOKEN", response.data.token);
       localStorage.setItem("@USERID", response.data.user.id);
-      setUser(response.data);
       navigate("/landingPage");
     } catch (error) {
       console.log(error);
@@ -36,29 +36,27 @@ export const UserProvider = ({ children }) => {
     navigate("/");
   };
 
-  const userRender = () => {
-    useEffect(() => {
-      const renderUser = async () => {
-        const user = localStorage.getItem("@TOKEN");
-        const config = {
-          headers: {
-            Authorization: `Bearer ${user}`,
-          },
-        };
-        try {
-          const response = await api.get("/profile", config);
-          setUser(response.data);
-        } catch (error) {
-          console.log(error);
-        }
+  useEffect(() => {
+    const renderUser = async () => {
+      const user = localStorage.getItem("@TOKEN");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user}`,
+        },
       };
-      renderUser();
-    }, []);
-  };
+      try {
+        const response = await api.get("/profile", config);
+        setUser(response.data);
+        navigate("/landingPage");
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    renderUser();
+  }, []);
+
   return (
-    <UserContext.Provider
-      value={{ User, loginUser, registerUser, logout, userRender }}
-    >
+    <UserContext.Provider value={{ User, loginUser, registerUser, logout }}>
       {children}
     </UserContext.Provider>
   );

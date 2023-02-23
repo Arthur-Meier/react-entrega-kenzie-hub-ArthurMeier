@@ -4,7 +4,6 @@ import GlobalStyle from "./styles/global";
 import { StyledApp } from "./styles/style";
 
 function App() {
-  const [count, setCount] = useState(0);
   return (
     <StyledApp className="App">
       <GlobalStyle />

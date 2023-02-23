@@ -1,24 +1,49 @@
 import React, { useContext } from "react";
+import { useForm } from "react-hook-form";
 import { TechContext } from "../../providers/TechContext";
+import { StyledModal } from "./BackroundModal/style";
+import FormModal from "./FormModal/FormModal";
+import HeaderModal from "./headerModal";
+import { DeleteBtn, PatchBtn, StyledDialog } from "./style";
 
-const PatchTechModal = () => {
-  const { removeTech } = useContext(TechContext);
+const PatchTechModal = ({ isOpen, onClose, techId }) => {
+  const { removeTech, patchTech, patchTechId } = useContext(TechContext);
+  const { register, handleSubmit } = useForm();
+
+  const submit = (formData) => {
+    patchTech(formData);
+    onClose();
+  };
+
+  if (!isOpen) {
+    return null;
+  }
+
   return (
-    <div>
-      <div>
-        <h2>Tecnologia Detalhes</h2>
-        <form>
-          <Input Label="Nome" type="text" placeholder="Nome da Tecnologia" />
-          <select name="" id="">
-            <option value="Iniciante">Iniciante</option>
-            <option value="Intermediário">Intermediário</option>
-            <option value="Avançado">Avançado</option>
-          </select>
-          <button>Salvar alterações</button>
-          <button onClick={removeTech()}>Excluir</button>
-        </form>
-      </div>
-    </div>
+    <>
+      <StyledModal onClick={() => onClose()} />
+      <StyledDialog id="patchTech" open>
+        <div>
+          <HeaderModal onClose={onClose} />
+          <FormModal
+            submit={submit}
+            handleSubmit={handleSubmit}
+            register={register}
+          >
+            <PatchBtn type="submit">Salvar alterações</PatchBtn>
+            <DeleteBtn
+              type="button"
+              onClick={() => {
+                removeTech(techId);
+                onClose();
+              }}
+            >
+              Excluir
+            </DeleteBtn>
+          </FormModal>
+        </div>
+      </StyledDialog>
+    </>
   );
 };
 
