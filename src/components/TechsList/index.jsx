@@ -5,7 +5,8 @@ import PatchTechModal from "../modal/PatchTechModal";
 import { TechContext } from "../../providers/TechContext";
 
 export const TechsList = () => {
-  const { Techs, patchTechId, setPatchTechId } = useContext(TechContext);
+  const { Techs, patchTechId, setPatchTechId, setPatchName } =
+    useContext(TechContext);
 
   return (
     <>
@@ -23,6 +24,7 @@ export const TechsList = () => {
             onPatchItem={() => {
               setPatchTechId(tech.id);
             }}
+            setPatchName={() => setPatchName(tech.title)}
           />
         ))}
       </StyledList>

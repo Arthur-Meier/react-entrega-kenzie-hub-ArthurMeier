@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { TechContext } from "../../providers/TechContext";
 import { StyledModal } from "./BackroundModal/style";
-import FormModal from "./FormModal/FormModal";
 import HeaderModal from "./headerModal";
 import { DeleteBtn, PatchBtn, StyledDialog } from "./style";
+import PatchFormModal from "./PatchFormModal/PatchFormModal";
 
-const PatchTechModal = ({ isOpen, onClose, techId }) => {
-  const { removeTech, patchTech, patchTechId } = useContext(TechContext);
+const PatchTechModal = ({ isOpen, onClose, techId, name }) => {
+  const { removeTech, patchTech, patchName } = useContext(TechContext);
   const { register, handleSubmit } = useForm();
 
   const submit = (formData) => {
@@ -25,10 +25,12 @@ const PatchTechModal = ({ isOpen, onClose, techId }) => {
       <StyledDialog id="patchTech" open>
         <div>
           <HeaderModal onClose={onClose} />
-          <FormModal
+          <PatchFormModal
+            name={name}
             submit={submit}
             handleSubmit={handleSubmit}
             register={register}
+            patchName={patchName}
           >
             <PatchBtn type="submit">Salvar alterações</PatchBtn>
             <DeleteBtn
@@ -40,7 +42,7 @@ const PatchTechModal = ({ isOpen, onClose, techId }) => {
             >
               Excluir
             </DeleteBtn>
-          </FormModal>
+          </PatchFormModal>
         </div>
       </StyledDialog>
     </>

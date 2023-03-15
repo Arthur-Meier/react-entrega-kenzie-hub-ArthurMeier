@@ -9,6 +9,7 @@ export const TechProvider = ({ children }) => {
   const token = localStorage.getItem("@TOKEN");
 
   const [patchTechId, setPatchTechId] = useState(undefined);
+  const [patchName, setPatchName] = useState(undefined);
 
   useEffect(() => {
     const renderTechs = async () => {
@@ -81,6 +82,8 @@ export const TechProvider = ({ children }) => {
         patchTech,
         patchTechId,
         setPatchTechId,
+        patchName,
+        setPatchName,
       }}
     >
       {children}
