@@ -14,7 +14,7 @@ export const StyledMain = styled.main`
     background: #212529;
     box-shadow: 0px 3.19812px 31.9812px -7.99531px rgba(0, 0, 0, 0.25);
     border-radius: 3.19812px;
-    width: 295.8px;
+    width: 295px;
     padding: 18px;
     margin-bottom: 10px;
   }
